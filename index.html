@@ -394,6 +394,8 @@
   }
   @media (max-width: 720px) {
     section.s { padding: 32px 24px 36px; }
+    .topbar { padding-bottom: 28px; }
+    .shell { padding-top: 28px; }
   }
 
   .s-label {
@@ -1623,18 +1625,52 @@
     window.openCmdk = open;
   })();
 
-  // ===== Contact form (placeholder handler — TODO: wire to backend) =====
-  const form = document.getElementById('contact-form');
-  const btnText = document.getElementById('cf-text');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    btnText.textContent = 'Sending…';
-    setTimeout(() => {
-      btnText.textContent = 'Sent ✓';
-      form.reset();
-      setTimeout(() => { btnText.textContent = 'Send message'; }, 2200);
-    }, 700);
-  });
+  // ===== Contact form — Formspree =====
+  (function() {
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('cf-submit');
+    const btnText = document.getElementById('cf-text');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = form.querySelector('[name="name"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const message = form.querySelector('[name="message"]').value.trim();
+
+      if (!name || !email || !message) {
+        const first = !name ? 'name' : !email ? 'email' : 'message';
+        form.querySelector(`[name="${first}"]`).focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btnText.textContent = 'Sending…';
+
+      try {
+        const res = await fetch('https://formspree.io/f/mykobaqp', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        if (res.ok) {
+          btnText.textContent = 'Sent ✓';
+          form.reset();
+          setTimeout(() => {
+            btnText.textContent = 'Send message';
+            btn.disabled = false;
+          }, 3000);
+        } else {
+          throw new Error();
+        }
+      } catch {
+        btnText.textContent = 'Failed — try again';
+        btn.disabled = false;
+        setTimeout(() => { btnText.textContent = 'Send message'; }, 3000);
+      }
+    });
+  })();
 
   ['open-cmdk-1','open-cmdk-2'].forEach(id => {
     const el = document.getElementById(id);
