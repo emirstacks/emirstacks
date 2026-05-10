@@ -412,7 +412,7 @@
   }
   .now .ic:hover { transform: scale(1.06); box-shadow: 0 10px 22px rgba(255,59,48,.42); }
   .now .ic:active { transform: scale(.96); }
-  .now .ic svg { width: 18px; height: 18px; }
+  .now .ic svg { width: 18px; height: 18px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
   .now .meta { display: flex; flex-direction: column; min-width: 0; }
   .now .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: rgba(255,255,255,.50); font-weight: 600; }
   .now .val { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: rgba(255,255,255,.82); }
@@ -442,10 +442,10 @@
     box-shadow: var(--shadow-card);
     scroll-margin-top: 24px;
   }
-  @media (max-width: 720px) {
+  @media (max-width: 1023px) {
     section.s { padding: 32px 24px 36px; }
     .topbar { padding-bottom: 28px; }
-    .shell { padding-top: 28px; }
+    .shell { padding-top: 0; }
   }
 
   .s-label {
@@ -594,7 +594,16 @@
   }
 
   /* per-project preview hues */
-  .proj.salon  .preview { background: linear-gradient(135deg, #fff0ef, #ffe2df); }
+  .proj.salon { background: #0a0a0a; border-color: rgba(255,255,255,.08); }
+  .proj.salon .tag { background: rgba(255,59,48,.12); }
+  .proj.salon .ttl { color: #fff; }
+  .proj.salon .desc { color: rgba(255,255,255,.55); }
+  .proj.salon .chip { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); border-color: rgba(255,255,255,.10); }
+  .proj.salon .arrow { color: rgba(255,255,255,.6); }
+  .proj.salon  .preview { background: #000; }
+  .proj.salon  .preview::before { background: #1a1a1a; border-bottom-color: rgba(255,255,255,.06); }
+  .proj.salon  .preview .ic { display: none; }
+  .proj.salon  .preview img { position: absolute; left: 0; right: 0; bottom: 0; top: 24px; width: 100%; height: calc(100% - 24px); object-fit: cover; object-position: top; }
   .proj.dental .preview { background: linear-gradient(135deg, #f3f7ff, #e8efff); }
   .proj.barber .preview { background: linear-gradient(135deg, #1c1c1e, #2c2c2e); }
   .proj.barber .preview .ic { color: rgba(255,255,255,.85); }
@@ -992,7 +1001,7 @@
   /* footer */
   .foot {
     margin: 18px 6px 8px;
-    color: var(--ink-40);
+    color: rgba(255,255,255,.35);
     font-size: 12px;
     display: flex; justify-content: space-between; align-items: center;
   }
@@ -1172,7 +1181,7 @@
 
           <a class="proj salon" href="https://maxsmobiledetailing.vercel.app" target="_blank" rel="noopener noreferrer">
             <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2z"></path><circle cx="12" cy="11" r="3"></circle></svg></span>
+              <img src="assets/max.png" alt="Mobile Detailing" />
             </div>
             <span class="tag">Landing Page</span>
             <h3 class="ttl">Mobile Detailing</h3>
@@ -1409,7 +1418,7 @@
 
       <div class="foot">
         <span>© 2026 Emir Stacks</span>
-        <span>Crafted with care · Press <kbd id="open-cmdk-1" style="font-family:inherit;border:1px solid var(--ink-10);border-radius:4px;padding:1px 5px;font-size:11px;cursor:pointer;">⌘</kbd> + <kbd id="open-cmdk-2" style="font-family:inherit;border:1px solid var(--ink-10);border-radius:4px;padding:1px 5px;font-size:11px;cursor:pointer;">K</kbd> to navigate</span>
+        <span>Crafted with care · Press <kbd id="open-cmdk-1" style="font-family:inherit;border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:1px 5px;font-size:11px;cursor:pointer;">⌘</kbd> + <kbd id="open-cmdk-2" style="font-family:inherit;border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:1px 5px;font-size:11px;cursor:pointer;">K</kbd> to navigate</span>
       </div>
     </main>
   </div>
