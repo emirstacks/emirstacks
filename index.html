@@ -10,7 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f5f5f7;
+    --bg: #0a0a0a;
+    --bg-image: url('assets/bg2.webp');
     --surface: #ffffff;
     --ink: #0a0a0a;
     --ink-70: rgba(10,10,10,.70);
@@ -24,7 +25,13 @@
     --red: #ff3b30;
     --yellow: #ffd60a;
     --green: #30d158;
-    --shadow-card: 0 1px 0 rgba(255,255,255,.6) inset, 0 8px 40px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-card:
+      0 3px 0 rgba(255,255,255,1) inset,
+      3px 0 0 rgba(255,255,255,.65) inset,
+      0 -3px 0 rgba(0,0,0,.28) inset,
+      -3px 0 0 rgba(0,0,0,.14) inset,
+      0 8px 40px rgba(0,0,0,.06),
+      0 1px 2px rgba(0,0,0,.04);
     --shadow-hover: 0 14px 44px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.05);
     --radius-card: 28px;
     --radius-md: 18px;
@@ -36,7 +43,7 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--font);
-    background: var(--bg);
+    background: var(--bg) var(--bg-image) center center / cover no-repeat fixed;
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -50,8 +57,8 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(900px 600px at 12% 8%, rgba(255,59,48,.05), transparent 60%),
-      radial-gradient(700px 500px at 92% 90%, rgba(255,214,10,.07), transparent 60%);
+      radial-gradient(900px 600px at 12% 8%, rgba(255,59,48,.12), transparent 60%),
+      radial-gradient(700px 500px at 92% 90%, rgba(255,214,10,.08), transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
@@ -61,10 +68,10 @@
     content: "";
     position: fixed;
     inset: 0;
-    background-image: radial-gradient(rgba(10,10,10,.18) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
     background-size: 24px 24px;
     background-position: 0 0;
-    opacity: .22;
+    opacity: .18;
     pointer-events: none;
     z-index: 0;
     -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
@@ -121,13 +128,24 @@
     gap: 28px;
   }
   @media (min-width: 1024px) {
-    .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 40px; }
+    .grid { grid-template-columns: 1fr; }
   }
 
   /* ======================= LEFT: PROFILE CARD ======================= */
   .left { position: relative; }
   @media (min-width: 1024px) {
-    .left { position: sticky; top: 28px; align-self: start; height: max-content; }
+    .left {
+      position: fixed;
+      left: max(28px, calc((100vw - 1400px) / 2 + 28px));
+      top: 50%;
+      transform: translateY(-50%);
+      width: calc((min(100vw, 1400px) - 96px) / 3);
+      height: auto;
+      z-index: 10;
+    }
+    .right {
+      margin-left: calc((min(100vw, 1400px) - 96px) / 3 + 40px);
+    }
   }
 
   .profile {
@@ -260,32 +278,38 @@
     width: 100%;
   }
 
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    margin: 6px 0 18px;
-    padding: 14px 0;
+  .stats-bar {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 20px 28px;
+    margin-bottom: 24px;
   }
-  .stats .cell {
+  .stats-cell {
+    flex: 1;
     text-align: center;
-    border-right: 1px solid var(--line);
   }
-  .stats .cell:last-child { border-right: 0; }
-  .stats .num {
+  .stats-sep {
+    width: 1px;
+    height: 36px;
+    background: var(--line);
+  }
+  .stats-num {
     display: block;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    color: var(--ink);
   }
-  .stats .lbl {
+  .stats-lbl {
     display: block;
     font-size: 11px;
     color: var(--ink-50);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     margin-top: 3px;
     font-weight: 500;
   }
@@ -336,21 +360,47 @@
   }
   .cta svg { width: 16px; height: 16px; }
 
-  /* small "now playing" style card under profile */
+  /* fixed mini player — bottom left, dock style */
   .now {
-    margin-top: 16px;
-    background: var(--surface);
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    padding: 14px 16px;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 40;
+    background: rgba(10,10,10,.86);
+    backdrop-filter: blur(28px) saturate(170%);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 8px 16px 8px 8px;
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: var(--shadow-card);
+    box-shadow:
+      0 14px 44px rgba(0,0,0,.45),
+      0 0 0 1px rgba(255,255,255,.05) inset,
+      0 1px 0 rgba(255,255,255,.14) inset;
+    transition: transform .25s cubic-bezier(.22,.99,.41,1);
+    animation: nowIn .7s cubic-bezier(.22,.99,.41,1) both;
+  }
+  @keyframes nowIn {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  .now:hover { transform: translateY(-2px); }
+  .now .lbl { color: rgba(255,255,255,.50); font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
+  .now .val  { color: rgba(255,255,255,.82); font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; }
+  .equalizer span { background: rgba(255,255,255,.80); }
+  @media (max-width: 720px) {
+    .now { bottom: 90px; left: 50%; transform: translateX(-50%); animation: nowInMobile .7s cubic-bezier(.22,.99,.41,1) both; }
+    .now:hover { transform: translateX(-50%) translateY(-2px); }
+  }
+  @keyframes nowInMobile {
+    from { transform: translateX(-50%) translateY(40px); opacity: 0; }
+    to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
   }
   .now .ic {
     width: 38px; height: 38px;
-    border-radius: 12px;
+    border-radius: 999px;
     background: linear-gradient(135deg, #ff3b30, #ffd60a);
     display: inline-flex; align-items: center; justify-content: center;
     color: #fff;
@@ -364,8 +414,8 @@
   .now .ic:active { transform: scale(.96); }
   .now .ic svg { width: 18px; height: 18px; }
   .now .meta { display: flex; flex-direction: column; min-width: 0; }
-  .now .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-50); font-weight: 600; }
-  .now .val { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; }
+  .now .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: rgba(255,255,255,.50); font-weight: 600; }
+  .now .val { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: rgba(255,255,255,.82); }
   .equalizer { margin-left: auto; display: inline-flex; gap: 3px; align-items: end; height: 16px; }
   .equalizer span {
     display: inline-block; width: 3px; background: var(--ink); border-radius: 2px;
@@ -959,7 +1009,7 @@
   .marquee-track { display: inline-flex; gap: 56px; align-items: center; padding: 8px 0;
     animation: marquee 38s linear infinite; white-space: nowrap; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
-  .marquee-item { color: var(--ink-50); font-size: 22px; font-weight: 600;
+  .marquee-item { color: rgba(255,255,255,.80); font-size: 22px; font-weight: 600;
     letter-spacing: -0.025em; display: inline-flex; align-items: center; gap: 14px; flex-shrink: 0; }
   .marquee-item .sep { width: 6px; height: 6px; border-radius: 999px; background: var(--red); opacity: .55; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -1002,6 +1052,21 @@
 
 <div class="grain" aria-hidden="true"></div>
 
+<div class="now" id="music-card">
+  <button class="ic" id="music-btn" aria-label="Play music" type="button">
+    <svg id="music-icon-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7L8 5z"></path></svg>
+    <svg id="music-icon-pause" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none;"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>
+  </button>
+  <span class="meta">
+    <span class="lbl" id="music-lbl">Paused</span>
+    <span class="val">Press play</span>
+  </span>
+  <span class="equalizer" id="music-eq" aria-hidden="true" style="animation-play-state:paused;"><span></span><span></span><span></span><span></span></span>
+  <audio id="music-audio" preload="none" loop>
+    <source src="assets/track.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+
 <div class="shell">
 
   <!-- Top bar -->
@@ -1035,11 +1100,7 @@
         <p class="title">Web Designer &amp; Developer</p>
         <p class="bio">Cooking clean websites and building booking platforms that just work.</p>
 
-        <div class="stats">
-          <div class="cell"><span class="num">15+</span><span class="lbl">Projects</span></div>
-          <div class="cell"><span class="num">10+</span><span class="lbl">Clients</span></div>
-          <div class="cell"><span class="num">2+</span><span class="lbl">Years</span></div>
-        </div>
+
 
         <div class="socials">
           <a class="icon-btn" href="https://instagram.com/emirstacks" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1056,24 +1117,19 @@
         </a>
       </article>
 
-      <div class="now reveal" id="music-card">
-        <button class="ic" id="music-btn" aria-label="Play music" type="button">
-          <svg id="music-icon-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7L8 5z"></path></svg>
-          <svg id="music-icon-pause" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none;"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>
-        </button>
-        <span class="meta">
-          <span class="lbl" id="music-lbl">Paused</span>
-          <span class="val">Press play</span>
-        </span>
-        <span class="equalizer" id="music-eq" aria-hidden="true" style="animation-play-state:paused;"><span></span><span></span><span></span><span></span></span>
-        <audio id="music-audio" preload="none" loop>
-          <source src="assets/track.mp3" type="audio/mpeg" />
-        </audio>
-      </div>
     </aside>
 
     <!-- ======================= RIGHT ======================= -->
     <main class="right">
+
+      <!-- STATS BAR -->
+      <div class="stats-bar reveal">
+        <div class="stats-cell"><span class="stats-num">15+</span><span class="stats-lbl">Projects</span></div>
+        <div class="stats-sep"></div>
+        <div class="stats-cell"><span class="stats-num">10+</span><span class="stats-lbl">Clients</span></div>
+        <div class="stats-sep"></div>
+        <div class="stats-cell"><span class="stats-num">2+</span><span class="stats-lbl">Years</span></div>
+      </div>
 
       <!-- ABOUT -->
       <section class="s reveal" id="about" data-screen-label="01 About">
@@ -1114,14 +1170,14 @@
 
         <div class="projects stagger">
 
-          <a class="proj salon" href="https://example.com" target="_blank" rel="noopener noreferrer">
+          <a class="proj salon" href="https://maxsmobiledetailing.vercel.app" target="_blank" rel="noopener noreferrer">
             <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><circle cx="12" cy="15" r="2"></circle></svg></span>
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2z"></path><circle cx="12" cy="11" r="3"></circle></svg></span>
             </div>
-            <span class="tag">Booking Platform</span>
-            <h3 class="ttl">Salon Booking Platform</h3>
-            <p class="desc">Full-stack salon scheduling — staff calendars, services, reminders.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Prisma</span><span class="chip">Postgres</span><span class="chip">Calendar</span></div>
+            <span class="tag">Landing Page</span>
+            <h3 class="ttl">Mobile Detailing</h3>
+            <p class="desc">Clean marketing site for a mobile car detailing service — booking CTA, services showcase.</p>
+            <div class="chips"><span class="chip">Next.js</span><span class="chip">Tailwind</span><span class="chip">Vercel</span></div>
             <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
           </a>
 
