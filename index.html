@@ -577,6 +577,11 @@
     color: var(--ink-40);
   }
   .proj .preview .ic svg { width: 30px; height: 30px; }
+  .proj .preview img {
+    position: absolute; left: 0; right: 0; bottom: 0; top: 24px;
+    width: 100%; height: calc(100% - 24px);
+    object-fit: cover; object-position: top;
+  }
   .proj .preview::before {
     /* mock browser bar */
     content: "";
@@ -604,7 +609,15 @@
   .proj.salon  .preview::before { background: #1a1a1a; border-bottom-color: rgba(255,255,255,.06); }
   .proj.salon  .preview .ic { display: none; }
   .proj.salon  .preview img { position: absolute; left: 0; right: 0; bottom: 0; top: 24px; width: 100%; height: calc(100% - 24px); object-fit: cover; object-position: top; }
-  .proj.dental .preview { background: linear-gradient(135deg, #f3f7ff, #e8efff); }
+  .proj.dental { background: #0b1a2e; border-color: rgba(255,255,255,.08); }
+  .proj.dental .tag { background: rgba(120,170,255,.14); color: #8ab4ff; }
+  .proj.dental .ttl { color: #fff; }
+  .proj.dental .desc { color: rgba(255,255,255,.55); }
+  .proj.dental .chip { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); border-color: rgba(255,255,255,.10); }
+  .proj.dental .arrow { color: rgba(255,255,255,.6); }
+  .proj.dental .preview { background: #061224; }
+  .proj.dental .preview::before { background: #11243f; border-bottom-color: rgba(255,255,255,.06); }
+  .proj.dental .preview .ic { display: none; }
   .proj.barber .preview { background: linear-gradient(135deg, #1c1c1e, #2c2c2e); }
   .proj.barber .preview .ic { color: rgba(255,255,255,.85); }
   .proj.rest   .preview { background: linear-gradient(135deg, #fff8de, #fff0a8); }
@@ -1183,21 +1196,21 @@
             <div class="preview">
               <img src="assets/max.png" alt="Mobile Detailing" />
             </div>
-            <span class="tag">Landing Page</span>
+            <span class="tag">Booking Platform</span>
             <h3 class="ttl">Mobile Detailing</h3>
             <p class="desc">Clean marketing site for a mobile car detailing service — booking CTA, services showcase.</p>
             <div class="chips"><span class="chip">Next.js</span><span class="chip">Tailwind</span><span class="chip">Vercel</span></div>
             <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
           </a>
 
-          <a class="proj dental" href="https://example.com" target="_blank" rel="noopener noreferrer">
+          <a class="proj dental" href="http://gentleman.emirstacks.com/" target="_blank" rel="noopener noreferrer">
             <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
+              <img src="assets/gentleman.png" alt="Gentleman Barber Booking" />
             </div>
-            <span class="tag">Landing Page</span>
-            <h3 class="ttl">Dental Clinic Website</h3>
-            <p class="desc">Calm, trustworthy marketing site with subtle motion.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Tailwind</span><span class="chip">Framer Motion</span></div>
+            <span class="tag">Booking Platform</span>
+            <h3 class="ttl">Gentleman Barber</h3>
+            <p class="desc">Full barber booking system — online reservations, staff scheduling, automated confirmations.</p>
+            <div class="chips"><span class="chip">Next.js</span><span class="chip">Auth.js</span><span class="chip">Booking</span><span class="chip">Email</span></div>
             <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
           </a>
 
