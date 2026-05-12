@@ -5,9 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emir — Web Designer &amp; Developer</title>
 <meta name="description" content="Cooking clean websites and building booking platforms that just work." />
+<meta name="author" content="Emir" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="canonical" href="https://emirstacks.com/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://emirstacks.com/" />
+<meta property="og:title" content="Emir — Web Designer &amp; Developer" />
+<meta property="og:description" content="Cooking clean websites and building booking platforms that just work." />
+<meta property="og:image" content="https://emirstacks.com/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="emirstacks" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://emirstacks.com/" />
+<meta name="twitter:title" content="Emir — Web Designer &amp; Developer" />
+<meta name="twitter:description" content="Cooking clean websites and building booking platforms that just work." />
+<meta name="twitter:image" content="https://emirstacks.com/assets/og.png" />
+
+<!-- Favicon (inline SVG) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Arial,sans-serif' font-size='38' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3EE%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Arial,sans-serif' font-size='38' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3EE%3C/text%3E%3C/svg%3E" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Emir",
+  "url": "https://emirstacks.com/",
+  "jobTitle": "Web Designer & Developer",
+  "description": "Web designer and developer building clean marketing sites and booking platforms.",
+  "sameAs": [
+    "https://github.com/emirstacks",
+    "https://instagram.com/emirstacks"
+  ]
+}
+</script>
 <style>
   :root {
     --bg: #0a0a0a;
@@ -399,6 +440,7 @@
     to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
   }
   .now .ic {
+    flex: 0 0 auto;
     width: 38px; height: 38px;
     border-radius: 999px;
     background: linear-gradient(135deg, #ff3b30, #ffd60a);
@@ -407,12 +449,13 @@
     border: 0;
     cursor: pointer;
     padding: 0;
+    position: relative;
     transition: transform .18s ease, box-shadow .18s ease;
     box-shadow: 0 6px 18px rgba(255,59,48,.30);
   }
   .now .ic:hover { transform: scale(1.06); box-shadow: 0 10px 22px rgba(255,59,48,.42); }
   .now .ic:active { transform: scale(.96); }
-  .now .ic svg { width: 18px; height: 18px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .now .ic svg { width: 18px; height: 18px; display: block; }
   .now .meta { display: flex; flex-direction: column; min-width: 0; }
   .now .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: rgba(255,255,255,.50); font-weight: 600; }
   .now .val { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: rgba(255,255,255,.82); }
@@ -1188,7 +1231,7 @@
       <section class="s reveal" id="projects" data-screen-label="02 Work">
         <span class="s-label">02 — Work</span>
         <h2 class="s-h">Projects &amp; demos.</h2>
-        <p class="s-sub">A mix of production booking platforms and clean marketing sites — each one shipped, each one cared for in the details.</p>
+        <p class="s-sub">Production booking platforms — shipped, polished, and built to handle real reservations.</p>
 
         <div class="projects stagger">
 
@@ -1211,50 +1254,6 @@
             <h3 class="ttl">Gentleman Barber</h3>
             <p class="desc">Full barber booking system — online reservations, staff scheduling, automated confirmations.</p>
             <div class="chips"><span class="chip">Next.js</span><span class="chip">Auth.js</span><span class="chip">Booking</span><span class="chip">Email</span></div>
-            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-          </a>
-
-          <a class="proj barber" href="https://example.com" target="_blank" rel="noopener noreferrer">
-            <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg></span>
-            </div>
-            <span class="tag">Booking Platform</span>
-            <h3 class="ttl">Barber Reservation App</h3>
-            <p class="desc">Auth, automated email reminders, recurring slots.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Auth.js</span><span class="chip">Cron</span><span class="chip">Email</span></div>
-            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-          </a>
-
-          <a class="proj rest" href="https://example.com" target="_blank" rel="noopener noreferrer">
-            <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18l-2 9H5l-2-9z"></path><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
-            </div>
-            <span class="tag">Landing Page</span>
-            <h3 class="ttl">Restaurant Landing</h3>
-            <p class="desc">Editorial layout, menu showcase, reservations CTA.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Tailwind</span></div>
-            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-          </a>
-
-          <a class="proj fit" href="https://example.com" target="_blank" rel="noopener noreferrer">
-            <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></span>
-            </div>
-            <span class="tag">Booking Platform</span>
-            <h3 class="ttl">Fitness Coach Platform</h3>
-            <p class="desc">Stripe payments, recurring sessions, member portal.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Stripe</span><span class="chip">Calendar</span></div>
-            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
-          </a>
-
-          <a class="proj agency" href="https://example.com" target="_blank" rel="noopener noreferrer">
-            <div class="preview">
-              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
-            </div>
-            <span class="tag">Landing Page</span>
-            <h3 class="ttl">Agency Portfolio</h3>
-            <p class="desc">Bold type, scroll-driven case studies, fast loads.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Framer Motion</span></div>
             <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
           </a>
 
@@ -1630,12 +1629,8 @@
       { group: 'Sections', label: 'Skills',  desc: 'Tools & stack',     icon: 'star', run: () => scrollToId('skills') },
       { group: 'Sections', label: 'Pricing', desc: 'Packages & rates',  icon: 'tag',  run: () => scrollToId('pricing') },
       { group: 'Sections', label: 'Contact', desc: 'Get in touch',      icon: 'mail', run: () => scrollToId('contact') },
-      { group: 'Projects', label: 'Salon Booking Platform', desc: 'Open demo', icon: 'link', run: () => window.open('https://example.com','_blank') },
-      { group: 'Projects', label: 'Dental Clinic Website',  desc: 'Open demo', icon: 'link', run: () => window.open('https://example.com','_blank') },
-      { group: 'Projects', label: 'Barber Reservation App', desc: 'Open demo', icon: 'link', run: () => window.open('https://example.com','_blank') },
-      { group: 'Projects', label: 'Restaurant Landing',     desc: 'Open demo', icon: 'link', run: () => window.open('https://example.com','_blank') },
-      { group: 'Projects', label: 'Fitness Coach Platform', desc: 'Open demo', icon: 'link', run: () => window.open('https://example.com','_blank') },
-      { group: 'Projects', label: 'Agency Portfolio',       desc: 'Open demo', icon: 'link', run: () => window.open('https://example.com','_blank') },
+      { group: 'Projects', label: 'Mobile Detailing',  desc: 'Open demo', icon: 'link', run: () => window.open('https://maxsmobiledetailing.vercel.app','_blank') },
+      { group: 'Projects', label: 'Gentleman Barber',  desc: 'Open demo', icon: 'link', run: () => window.open('http://gentleman.emirstacks.com/','_blank') },
       { group: 'Actions',  label: 'Email me',       desc: 'emirstackz@gmail.com', icon: 'mail', run: () => location.href = 'mailto:emirstackz@gmail.com' },
       { group: 'Actions',  label: 'Open Instagram', desc: '@emirstacks',          icon: 'ig',   run: () => window.open('https://instagram.com/emirstacks','_blank') },
       { group: 'Actions',  label: 'Toggle music',   desc: 'Play / pause',         icon: 'play', run: () => document.getElementById('music-btn').click() },
