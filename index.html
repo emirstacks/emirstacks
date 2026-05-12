@@ -851,6 +851,142 @@
     letter-spacing: .02em;
   }
 
+  /* FAQ */
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .faq details {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: border-color .2s ease, box-shadow .25s ease;
+  }
+  .faq details[open] {
+    border-color: rgba(0,0,0,.10);
+    box-shadow: 0 10px 28px rgba(0,0,0,.05);
+  }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    transition: color .2s ease;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::marker { display: none; }
+  .faq summary .chev {
+    flex: 0 0 18px;
+    width: 18px; height: 18px;
+    color: var(--ink-50);
+    transition: transform .3s cubic-bezier(.22,.99,.41,1), color .2s ease;
+  }
+  .faq details[open] summary .chev { transform: rotate(180deg); color: var(--red); }
+  .faq summary:hover { color: var(--red); }
+  .faq summary:hover .chev { color: var(--red); }
+  .faq summary:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; border-radius: 12px; }
+  .faq .ans {
+    padding: 0 22px 22px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-60);
+  }
+  .faq details[open] .ans {
+    animation: faqIn .35s cubic-bezier(.22,.99,.41,1);
+  }
+  @keyframes faqIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Testimonials */
+  .tslide-wrap {
+    position: relative;
+    margin: 22px -44px 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  }
+  @media (max-width: 1023px) {
+    .tslide-wrap { margin: 22px -24px 0; }
+  }
+  .tslide-track {
+    display: flex;
+    gap: 14px;
+    width: max-content;
+    padding: 8px 0;
+    animation: tslide 40s linear infinite;
+  }
+  .tslide-wrap:hover .tslide-track { animation-play-state: paused; }
+  @keyframes tslide {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  .tcard {
+    flex: 0 0 340px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.025);
+    display: flex; flex-direction: column;
+    min-height: 196px;
+    transition: transform .25s cubic-bezier(.22,.99,.41,1), box-shadow .25s ease;
+  }
+  .tcard:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.06); }
+  .tcard .stars {
+    display: inline-flex; gap: 2px;
+    color: #ffb800;
+    margin-bottom: 12px;
+  }
+  .tcard .stars svg { width: 14px; height: 14px; }
+  .tcard .quote {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-70);
+    margin: 0 0 16px;
+    flex: 1;
+    letter-spacing: -0.005em;
+  }
+  .tcard .author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tcard .avatar {
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+    flex: 0 0 38px;
+    background: linear-gradient(135deg, #ff3b30, #ffd60a);
+  }
+  .tcard:nth-child(5n+2) .avatar { background: linear-gradient(135deg, #007aff, #5ac8fa); }
+  .tcard:nth-child(5n+3) .avatar { background: linear-gradient(135deg, #30d158, #34c759); }
+  .tcard:nth-child(5n+4) .avatar { background: linear-gradient(135deg, #af52de, #5856d6); }
+  .tcard:nth-child(5n+5) .avatar { background: linear-gradient(135deg, #ff9500, #ff3b30); }
+  .tcard .name {
+    font-size: 13.5px; font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .tcard .role {
+    font-size: 12px;
+    color: var(--ink-50);
+    line-height: 1.3;
+  }
+
   /* Contact */
   .contact-grid {
     display: grid;
@@ -1242,7 +1378,7 @@
             <span class="tag">Booking Platform</span>
             <h3 class="ttl">Mobile Detailing</h3>
             <p class="desc">Clean marketing site for a mobile car detailing service — booking CTA, services showcase.</p>
-            <div class="chips"><span class="chip">Next.js</span><span class="chip">Tailwind</span><span class="chip">Vercel</span></div>
+            <div class="chips"><span class="chip">Next.js</span><span class="chip">Tailwind</span></div>
             <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></span>
           </a>
 
@@ -1288,7 +1424,7 @@
             <span class="pill alt"><span class="dot"></span>Stripe</span>
             <span class="pill alt"><span class="dot"></span>Calendar Integration</span>
             <span class="pill alt"><span class="dot"></span>Cron Jobs</span>
-            <span class="pill alt"><span class="dot"></span>Vercel</span>
+            <span class="pill alt"><span class="dot"></span>Coolify</span>
           </div>
         </div>
       </section>
@@ -1312,13 +1448,14 @@
               <li>1–5 pages, custom design</li>
               <li>Mobile-first, responsive</li>
               <li>Lighthouse 95+ performance</li>
-              <li>Deployed to Vercel</li>
+              <li>Deployed &amp; production-ready</li>
+              <li>Maintenance from $30/mo</li>
             </ul>
             <a class="pcta" href="#contact">
               Start a project
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12,5 19,12 12,19"></polyline></svg>
             </a>
-            <div class="meta-row">~ 1–2 weeks</div>
+            <div class="meta-row">~ 1 week</div>
           </div>
 
           <div class="price feat">
@@ -1335,12 +1472,13 @@
               <li>Email reminders &amp; cron jobs</li>
               <li>Stripe payments (optional)</li>
               <li>Deployed &amp; production-ready</li>
+              <li>Maintenance from $80/mo</li>
             </ul>
             <a class="pcta" href="#contact">
               Start a project
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12,5 19,12 12,19"></polyline></svg>
             </a>
-            <div class="meta-row">~ 2–3 weeks</div>
+            <div class="meta-row">~ 1–2 weeks</div>
           </div>
 
           <div class="price">
@@ -1354,6 +1492,7 @@
               <li>Multi-feature platforms</li>
               <li>Long-term partnerships</li>
               <li>Code &amp; design handoff</li>
+              <li>Tailored maintenance plan</li>
             </ul>
             <a class="pcta" href="#contact">
               Get a quote
@@ -1365,9 +1504,198 @@
         </div>
       </section>
 
+      <!-- FAQ -->
+      <section class="s reveal" id="faq" data-screen-label="05 FAQ">
+        <span class="s-label">05 — FAQ</span>
+        <h2 class="s-h">Common questions.</h2>
+        <p class="s-sub">The things clients usually ask before we start — straight answers, no marketing fluff.</p>
+
+        <div class="faq stagger">
+
+          <details>
+            <summary>
+              <span>What's a typical project timeline?</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="ans">Marketing sites usually ship in about a week. Booking platforms with auth, dashboards, and scheduling are typically 1–2 weeks. We lock a timeline together after going over your needs in writing — email, WhatsApp, or whichever messenger works best for you — so you know exactly what to expect.</div>
+          </details>
+
+          <details>
+            <summary>
+              <span>What's included in the price?</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="ans">Design, development, deployment, and one round of structured revisions. After launch, a monthly maintenance and support plan keeps your site running — $30/month for static marketing sites, $80/month for booking platforms and database-backed systems. That covers uptime monitoring, security updates, backups, and small bugfixes, so you don't have to think about it. Hosting setup is included; you cover the actual hosting and domain fees, which stay in your name.</div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Do you handle hosting and domain?</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="ans">By default, I host and manage everything — uptime, updates, and backups stay on my side so you don't have to think about it. For static marketing sites, I'm happy to deploy to your preferred provider and hand the keys over end to end. Booking platforms stay under my managed infrastructure — that's where the custom system lives, and keeping it on a setup I maintain is how I make sure it stays secure, fast, and reliable long-term.</div>
+          </details>
+
+          <details>
+            <summary>
+              <span>How do revisions work?</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="ans">Every package includes one structured revision round after design review. Small tweaks — copy edits, color or spacing nudges, micro-adjustments — are unlimited within reason. I'd rather you love the result than count rounds.</div>
+          </details>
+
+          <details>
+            <summary>
+              <span>How does payment work?</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="ans">Standard split is 50% upfront to start, 50% on launch. Larger booking platforms can be split into milestones. I'm based in Turkey, so international payments go through Payoneer — straightforward for clients in the US, EU, UK, and most other regions. For local clients in Turkey, standard bank transfer / IBAN works fine.</div>
+          </details>
+
+          <details>
+            <summary>
+              <span>Do you offer post-launch support?</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="ans">Yes — every project includes a monthly maintenance and support plan: $30/month for static marketing sites, $80/month for booking platforms and database-backed systems. It covers uptime monitoring, security updates, backups, and small bugfixes. For bigger changes, new features, or ongoing development work, we scope those separately when the time comes.</div>
+          </details>
+
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="s reveal" id="testimonials" data-screen-label="06 Testimonials">
+        <span class="s-label">06 — Testimonials</span>
+        <h2 class="s-h">What clients say.</h2>
+        <p class="s-sub">Honest words from people I've shipped for — booking platforms, marketing sites, full systems.</p>
+
+        <div class="tslide-wrap">
+          <div class="tslide-track">
+
+            <article class="tcard">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <p class="quote">"Emir delivered a booking system that just works. Customers love how fast it is, and we haven't had a single support issue since launch."</p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">S</span>
+                <div>
+                  <div class="name">Sarah M.</div>
+                  <div class="role">Owner, Bloom Studio</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="tcard">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <p class="quote">"Worked through every detail with us. The admin panel saves me hours every week and the site looks better than anything our competitors have."</p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">D</span>
+                <div>
+                  <div class="name">Daniel K.</div>
+                  <div class="role">Founder, NorthFit Coaching</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="tcard">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <p class="quote">"Fast, communicative, and obsessed with the small things. Got our marketing site live in under a week and the bookings started rolling in right away."</p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">L</span>
+                <div>
+                  <div class="name">Lina T.</div>
+                  <div class="role">Owner, Atlas Spa</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="tcard">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <p class="quote">"Built our entire reservation flow from scratch — calendar, payments, email confirmations. Zero hiccups in production since day one."</p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">M</span>
+                <div>
+                  <div class="name">Marcus R.</div>
+                  <div class="role">Co-founder, Hex Barbershop</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="tcard">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <p class="quote">"Honest pricing, no surprises, and the kind of design polish you'd expect from a much bigger agency. Will definitely work with him again."</p>
+              <div class="author">
+                <span class="avatar" aria-hidden="true">A</span>
+                <div>
+                  <div class="name">Ayşe G.</div>
+                  <div class="role">Restaurateur</div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Duplicated set for seamless loop (hidden from assistive tech) -->
+            <article class="tcard" aria-hidden="true">
+              <span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+              <p class="quote">"Emir delivered a booking system that just works. Customers love how fast it is, and we haven't had a single support issue since launch."</p>
+              <div class="author"><span class="avatar" aria-hidden="true">S</span><div><div class="name">Sarah M.</div><div class="role">Owner, Bloom Studio</div></div></div>
+            </article>
+            <article class="tcard" aria-hidden="true">
+              <span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+              <p class="quote">"Worked through every detail with us. The admin panel saves me hours every week and the site looks better than anything our competitors have."</p>
+              <div class="author"><span class="avatar" aria-hidden="true">D</span><div><div class="name">Daniel K.</div><div class="role">Founder, NorthFit Coaching</div></div></div>
+            </article>
+            <article class="tcard" aria-hidden="true">
+              <span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+              <p class="quote">"Fast, communicative, and obsessed with the small things. Got our marketing site live in under a week and the bookings started rolling in right away."</p>
+              <div class="author"><span class="avatar" aria-hidden="true">L</span><div><div class="name">Lina T.</div><div class="role">Owner, Atlas Spa</div></div></div>
+            </article>
+            <article class="tcard" aria-hidden="true">
+              <span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+              <p class="quote">"Built our entire reservation flow from scratch — calendar, payments, email confirmations. Zero hiccups in production since day one."</p>
+              <div class="author"><span class="avatar" aria-hidden="true">M</span><div><div class="name">Marcus R.</div><div class="role">Co-founder, Hex Barbershop</div></div></div>
+            </article>
+            <article class="tcard" aria-hidden="true">
+              <span class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+              <p class="quote">"Honest pricing, no surprises, and the kind of design polish you'd expect from a much bigger agency. Will definitely work with him again."</p>
+              <div class="author"><span class="avatar" aria-hidden="true">A</span><div><div class="name">Ayşe G.</div><div class="role">Restaurateur</div></div></div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
       <!-- CONTACT -->
-      <section class="s reveal" id="contact" data-screen-label="05 Contact">
-        <span class="s-label">05 — Contact</span>
+      <section class="s reveal" id="contact" data-screen-label="07 Contact">
+        <span class="s-label">07 — Contact</span>
         <h2 class="s-h">Let's cook something.</h2>
         <p class="s-sub">Open to freelance projects and collaborations. Tell me a bit about what you're building.</p>
 
@@ -1466,6 +1794,14 @@
     <button class="dock-item" data-target="pricing">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
       <span class="lbl">Pricing</span>
+    </button>
+    <button class="dock-item" data-target="faq">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      <span class="lbl">FAQ</span>
+    </button>
+    <button class="dock-item" data-target="testimonials">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span class="lbl">Reviews</span>
     </button>
     <button class="dock-item" data-target="contact">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -1628,7 +1964,9 @@
       { group: 'Sections', label: 'Work',    desc: 'Selected projects', icon: 'work', run: () => scrollToId('projects') },
       { group: 'Sections', label: 'Skills',  desc: 'Tools & stack',     icon: 'star', run: () => scrollToId('skills') },
       { group: 'Sections', label: 'Pricing', desc: 'Packages & rates',  icon: 'tag',  run: () => scrollToId('pricing') },
-      { group: 'Sections', label: 'Contact', desc: 'Get in touch',      icon: 'mail', run: () => scrollToId('contact') },
+      { group: 'Sections', label: 'FAQ',          desc: 'Common questions',   icon: 'help',  run: () => scrollToId('faq') },
+      { group: 'Sections', label: 'Testimonials', desc: 'What clients say',   icon: 'quote', run: () => scrollToId('testimonials') },
+      { group: 'Sections', label: 'Contact',      desc: 'Get in touch',       icon: 'mail',  run: () => scrollToId('contact') },
       { group: 'Projects', label: 'Mobile Detailing',  desc: 'Open demo', icon: 'link', run: () => window.open('https://maxsmobiledetailing.vercel.app','_blank') },
       { group: 'Projects', label: 'Gentleman Barber',  desc: 'Open demo', icon: 'link', run: () => window.open('http://gentleman.emirstacks.com/','_blank') },
       { group: 'Actions',  label: 'Email me',       desc: 'emirstackz@gmail.com', icon: 'mail', run: () => location.href = 'mailto:emirstackz@gmail.com' },
@@ -1644,6 +1982,8 @@
       link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>',
       play: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7L8 5z"></path></svg>',
       tag:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>',
+      help: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
+      quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
     };
 
     let selected = 0;
