@@ -1156,6 +1156,13 @@
   @media (min-width: 600px) {
     .dock-item .lbl { display: inline; }
   }
+  /* Hide secondary sections from dock on mobile to keep it uncluttered */
+  @media (max-width: 599px) {
+    .dock-item[data-target="skills"],
+    .dock-item[data-target="faq"] {
+      display: none;
+    }
+  }
 
   .dock-pill {
     position: absolute;
@@ -1168,7 +1175,8 @@
       0 0 0 1px rgba(255,255,255,.05) inset;
     transition:
       left .42s cubic-bezier(.22,.99,.41,1),
-      width .42s cubic-bezier(.22,.99,.41,1);
+      width .42s cubic-bezier(.22,.99,.41,1),
+      opacity .25s ease;
     pointer-events: none;
     z-index: 0;
   }
@@ -1325,11 +1333,11 @@
 
       <!-- STATS BAR -->
       <div class="stats-bar reveal">
-        <div class="stats-cell"><span class="stats-num">15+</span><span class="stats-lbl">Projects</span></div>
+        <div class="stats-cell"><span class="stats-num" data-target="15" data-suffix="+">15+</span><span class="stats-lbl">Projects</span></div>
         <div class="stats-sep"></div>
-        <div class="stats-cell"><span class="stats-num">10+</span><span class="stats-lbl">Clients</span></div>
+        <div class="stats-cell"><span class="stats-num" data-target="10" data-suffix="+">10+</span><span class="stats-lbl">Clients</span></div>
         <div class="stats-sep"></div>
-        <div class="stats-cell"><span class="stats-num">2+</span><span class="stats-lbl">Years</span></div>
+        <div class="stats-cell"><span class="stats-num" data-target="2" data-suffix="+">2+</span><span class="stats-lbl">Years</span></div>
       </div>
 
       <!-- ABOUT -->
@@ -1823,6 +1831,43 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
   reveals.forEach(r => io.observe(r));
 
+  // ===== Animated stat counters =====
+  (function () {
+    const nums = document.querySelectorAll('.stats-num[data-target]');
+    if (!nums.length) return;
+    // Reset to 0 immediately so the flash from initial value to 0 happens before paint
+    nums.forEach(n => {
+      const suffix = n.dataset.suffix || '';
+      n.textContent = '0' + suffix;
+    });
+
+    function animateCounter(el, target, suffix, duration) {
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        const value = Math.floor(eased * target);
+        el.textContent = value + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = target + suffix;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || '';
+          animateCounter(el, target, suffix, 1400);
+          statsObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(n => statsObserver.observe(n));
+  })();
+
   // ===== Clock =====
   const clockEl = document.getElementById('clock');
   function tick() {
@@ -1841,12 +1886,15 @@
   const sections = sectionIds.map(id => document.getElementById(id));
 
   function movePillTo(item) {
-    if (!item) return;
+    if (!item) { pill.style.opacity = '0'; return; }
     const r = item.getBoundingClientRect();
+    // If item is hidden (e.g. mobile dock has fewer items), fade pill out instead of jumping to 0,0
+    if (r.width === 0) { pill.style.opacity = '0'; return; }
     const dr = dock.getBoundingClientRect();
     const left = r.left - dr.left;
     pill.style.left = `${left}px`;
     pill.style.width = `${r.width}px`;
+    pill.style.opacity = '1';
   }
 
   function setActive(id) {
