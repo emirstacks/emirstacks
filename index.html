@@ -614,12 +614,6 @@
     overflow: hidden;
     margin-bottom: 14px;
   }
-  .proj .preview .ic {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--ink-40);
-  }
-  .proj .preview .ic svg { width: 30px; height: 30px; }
   .proj .preview img {
     position: absolute; left: 0; right: 0; bottom: 0; top: 24px;
     width: 100%; height: calc(100% - 24px);
@@ -650,8 +644,6 @@
   .proj.salon .arrow { color: rgba(255,255,255,.6); }
   .proj.salon  .preview { background: #000; }
   .proj.salon  .preview::before { background: #1a1a1a; border-bottom-color: rgba(255,255,255,.06); }
-  .proj.salon  .preview .ic { display: none; }
-  .proj.salon  .preview img { position: absolute; left: 0; right: 0; bottom: 0; top: 24px; width: 100%; height: calc(100% - 24px); object-fit: cover; object-position: top; }
   .proj.dental { background: #0b1a2e; border-color: rgba(255,255,255,.08); }
   .proj.dental .tag { background: rgba(120,170,255,.14); color: #8ab4ff; }
   .proj.dental .ttl { color: #fff; }
@@ -660,12 +652,6 @@
   .proj.dental .arrow { color: rgba(255,255,255,.6); }
   .proj.dental .preview { background: #061224; }
   .proj.dental .preview::before { background: #11243f; border-bottom-color: rgba(255,255,255,.06); }
-  .proj.dental .preview .ic { display: none; }
-  .proj.barber .preview { background: linear-gradient(135deg, #1c1c1e, #2c2c2e); }
-  .proj.barber .preview .ic { color: rgba(255,255,255,.85); }
-  .proj.rest   .preview { background: linear-gradient(135deg, #fff8de, #fff0a8); }
-  .proj.fit    .preview { background: linear-gradient(135deg, #effbf2, #d8f4e1); }
-  .proj.agency .preview { background: linear-gradient(135deg, #f6f0ff, #e6d8ff); }
 
   .proj .tag {
     display: inline-block;
@@ -1333,9 +1319,9 @@
 
       <!-- STATS BAR -->
       <div class="stats-bar reveal">
-        <div class="stats-cell"><span class="stats-num" data-target="15" data-suffix="+">15+</span><span class="stats-lbl">Projects</span></div>
+        <div class="stats-cell"><span class="stats-num" data-target="5" data-suffix="+">5+</span><span class="stats-lbl">Projects</span></div>
         <div class="stats-sep"></div>
-        <div class="stats-cell"><span class="stats-num" data-target="10" data-suffix="+">10+</span><span class="stats-lbl">Clients</span></div>
+        <div class="stats-cell"><span class="stats-num" data-target="3" data-suffix="+">3+</span><span class="stats-lbl">Clients</span></div>
         <div class="stats-sep"></div>
         <div class="stats-cell"><span class="stats-num" data-target="2" data-suffix="+">2+</span><span class="stats-lbl">Years</span></div>
       </div>
