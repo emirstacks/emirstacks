@@ -30,9 +30,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Arial,sans-serif' font-size='38' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3EE%3C/text%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Arial,sans-serif' font-size='38' font-weight='700' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3EE%3C/text%3E%3C/svg%3E" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -50,6 +48,15 @@
 }
 </script>
 <style>
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("assets/fonts/inter-var.woff2") format("woff2-variations"),
+         url("assets/fonts/inter-var.woff2") format("woff2");
+  }
+
   :root {
     --bg: #0a0a0a;
     --bg-image: url('assets/bg2.webp');
@@ -81,12 +88,18 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   body {
     font-family: var(--font);
+    font-feature-settings: "cv11", "ss01", "ss03";
     background: var(--bg) var(--bg-image) center center / cover no-repeat fixed;
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     letter-spacing: -0.01em;
     overflow-x: hidden;
@@ -400,78 +413,6 @@
     box-shadow: 0 12px 28px rgba(255,59,48,.42), 0 0 0 1px rgba(255,255,255,.2) inset;
   }
   .cta svg { width: 16px; height: 16px; }
-
-  /* fixed mini player — bottom left, dock style */
-  .now {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 40;
-    background: rgba(10,10,10,.86);
-    backdrop-filter: blur(28px) saturate(170%);
-    -webkit-backdrop-filter: blur(28px) saturate(170%);
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.14);
-    padding: 8px 16px 8px 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow:
-      0 14px 44px rgba(0,0,0,.45),
-      0 0 0 1px rgba(255,255,255,.05) inset,
-      0 1px 0 rgba(255,255,255,.14) inset;
-    transition: transform .25s cubic-bezier(.22,.99,.41,1);
-    animation: nowIn .7s cubic-bezier(.22,.99,.41,1) both;
-  }
-  @keyframes nowIn {
-    from { transform: translateY(40px); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-  }
-  .now:hover { transform: translateY(-2px); }
-  .now .lbl { color: rgba(255,255,255,.50); font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
-  .now .val  { color: rgba(255,255,255,.82); font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; }
-  .equalizer span { background: rgba(255,255,255,.80); }
-  @media (max-width: 720px) {
-    .now { bottom: 90px; left: 50%; transform: translateX(-50%); animation: nowInMobile .7s cubic-bezier(.22,.99,.41,1) both; }
-    .now:hover { transform: translateX(-50%) translateY(-2px); }
-  }
-  @keyframes nowInMobile {
-    from { transform: translateX(-50%) translateY(40px); opacity: 0; }
-    to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
-  }
-  .now .ic {
-    flex: 0 0 auto;
-    width: 38px; height: 38px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #ff3b30, #ffd60a);
-    display: inline-flex; align-items: center; justify-content: center;
-    color: #fff;
-    border: 0;
-    cursor: pointer;
-    padding: 0;
-    position: relative;
-    transition: transform .18s ease, box-shadow .18s ease;
-    box-shadow: 0 6px 18px rgba(255,59,48,.30);
-  }
-  .now .ic:hover { transform: scale(1.06); box-shadow: 0 10px 22px rgba(255,59,48,.42); }
-  .now .ic:active { transform: scale(.96); }
-  .now .ic svg { width: 18px; height: 18px; display: block; }
-  .now .meta { display: flex; flex-direction: column; min-width: 0; }
-  .now .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em; color: rgba(255,255,255,.50); font-weight: 600; }
-  .now .val { font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: rgba(255,255,255,.82); }
-  .equalizer { margin-left: auto; display: inline-flex; gap: 3px; align-items: end; height: 16px; }
-  .equalizer span {
-    display: inline-block; width: 3px; background: var(--ink); border-radius: 2px;
-    animation: bar 1s ease-in-out infinite;
-  }
-  .equalizer span:nth-child(1) { animation-delay: .0s; }
-  .equalizer span:nth-child(2) { animation-delay: .2s; }
-  .equalizer span:nth-child(3) { animation-delay: .4s; }
-  .equalizer span:nth-child(4) { animation-delay: .1s; }
-  @keyframes bar {
-    0%, 100% { height: 4px; }
-    50% { height: 14px; }
-  }
 
   /* ======================= RIGHT: SECTIONS ======================= */
   .right { min-width: 0; }
@@ -1247,21 +1188,6 @@
 
 <div class="grain" aria-hidden="true"></div>
 
-<div class="now" id="music-card">
-  <button class="ic" id="music-btn" aria-label="Play music" type="button">
-    <svg id="music-icon-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7L8 5z"></path></svg>
-    <svg id="music-icon-pause" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="display:none;"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>
-  </button>
-  <span class="meta">
-    <span class="lbl" id="music-lbl">Paused</span>
-    <span class="val">Press play</span>
-  </span>
-  <span class="equalizer" id="music-eq" aria-hidden="true" style="animation-play-state:paused;"><span></span><span></span><span></span><span></span></span>
-  <audio id="music-audio" preload="none" loop>
-    <source src="assets/track.mp3?v=2" type="audio/mpeg" />
-  </audio>
-</div>
-
 <div class="shell">
 
   <!-- Top bar -->
@@ -1922,38 +1848,6 @@
     onScroll();
   });
 
-  // ===== Music play/pause =====
-  (function () {
-    const btn = document.getElementById('music-btn');
-    const audio = document.getElementById('music-audio');
-    const iconPlay = document.getElementById('music-icon-play');
-    const iconPause = document.getElementById('music-icon-pause');
-    const lbl = document.getElementById('music-lbl');
-    const eq = document.getElementById('music-eq');
-    let playing = false;
-    btn.addEventListener('click', () => {
-      playing = !playing;
-      if (playing) {
-        // try to play; will silently fail until a <source> is added
-        audio.play().catch(() => {});
-        iconPlay.style.display = 'none';
-        iconPause.style.display = '';
-        lbl.textContent = 'Now playing';
-        eq.style.animationPlayState = 'running';
-        eq.querySelectorAll('span').forEach(s => s.style.animationPlayState = 'running');
-      } else {
-        audio.pause();
-        iconPlay.style.display = '';
-        iconPause.style.display = 'none';
-        lbl.textContent = 'Paused';
-        eq.querySelectorAll('span').forEach(s => s.style.animationPlayState = 'paused');
-      }
-      btn.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
-    });
-    // start with eq paused
-    eq.querySelectorAll('span').forEach(s => s.style.animationPlayState = 'paused');
-  })();
-
   // ===== Project card 3D tilt + cursor spotlight =====
   (function () {
     const cards = document.querySelectorAll('.proj');
@@ -2005,7 +1899,6 @@
       { group: 'Projects', label: 'Gentleman Barber',  desc: 'Open demo', icon: 'link', run: () => window.open('http://gentleman.emirstacks.com/','_blank') },
       { group: 'Actions',  label: 'Email me',       desc: 'emirstackz@gmail.com', icon: 'mail', run: () => location.href = 'mailto:emirstackz@gmail.com' },
       { group: 'Actions',  label: 'Open Instagram', desc: '@emirstacks',          icon: 'ig',   run: () => window.open('https://instagram.com/emirstacks','_blank') },
-      { group: 'Actions',  label: 'Toggle music',   desc: 'Play / pause',         icon: 'play', run: () => document.getElementById('music-btn').click() },
     ];
     const ICONS = {
       user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
@@ -2014,7 +1907,6 @@
       mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
       ig:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>',
       link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>',
-      play: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7L8 5z"></path></svg>',
       tag:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>',
       help: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
       quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
